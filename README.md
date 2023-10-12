@@ -125,7 +125,10 @@ The result you're looking for is the value towards the bottom that says GFLOP/s.
 
 Be aware of `nodes` vs. `ntasks`
 
+Documentation: [https://slurm.schedmd.com/sbatch.html](https://slurm.schedmd.com/sbatch.html)
+
 ```bash
+# submit.sbat or
 #!/bin/bash
 #SBATCH --time=0-0:01:00     # d-hh:mm:ss
 #SBATCH --nodes=1            # NUMBER OF NODES
@@ -134,4 +137,14 @@ Be aware of `nodes` vs. `ntasks`
 #SBATCH --chdir=BLAH         # probably share a parent dir with everything in there
 #SBATCH --job-name=BLAH      # hpl_bristol something there
 #SBATCH --output=BLAH        # both stdout and stderr in here
+
+# Rest of script here
 ```
+
+CLI things to note:
+
+`squeue -u <USERNAME>`
+
+Submit scripts:
+
+`sbatch /path/to/script`
