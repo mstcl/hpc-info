@@ -53,7 +53,6 @@ Turn this into a slurm script and increase N to what the website suggests (and m
 You can also try changing out compiler/mpi/blas library. This will require you to reconfigure and rebuild. 
 Play around with different number of nodes/cores. Remember to change the mpirun command as well as p and q
 
-
 ### Running
 
 To run using MPI, you'll need to do something that looks like the following:
@@ -114,8 +113,25 @@ Networking:
   - Ethernet (1-10 Gb)
   - Infiniband (better than ethernet for performance)
 
+CPU vs. GPU:
+  - CPU cheaper and easier to optimize.
+  - GPU harder to configure.
+
 ### Results
 
 The result you're looking for is the value towards the bottom that says GFLOP/s. That's pretty much the only value we care about
 
 ### SLURM syntax
+
+Be aware of `nodes` vs. `ntasks`
+
+```bash
+#!/bin/bash
+#SBATCH --time=0-0:01:00     # d-hh:mm:ss
+#SBATCH --nodes=1            # NUMBER OF NODES
+#SBATCH --ntasks=4           # TOTAL CORES
+#SBATCH --account=BLAH       # probably given
+#SBATCH --chdir=BLAH         # probably share a parent dir with everything in there
+#SBATCH --job-name=BLAH      # hpl_bristol something there
+#SBATCH --output=BLAH        # both stdout and stderr in here
+```
