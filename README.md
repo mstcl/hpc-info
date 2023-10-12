@@ -119,7 +119,7 @@ CPU vs. GPU:
 
 ### Results
 
-The result you're looking for is the value towards the bottom that says GFLOP/s. That's pretty much the only value we care about
+The result you're looking for is the value towards the bottom that says GFLOPs. That's pretty much the only value we care about
 
 ### SLURM syntax
 
