@@ -2,9 +2,16 @@
 
 Types of benchmarking
 
-* IOZONE
-* HPL
-* IPM
+* IOZONE: i/o speed
+  * choose big number to read/write
+  * read > write
+  * care about the time it takes to read/write.vegetarian 
+* HPL:
+* IPM:
+* STREAM: memory
+  * same as IOZONE but uses memory instead
+  * bandwidth vs. size affected by cache (L1, L2, L3, RAM)
+  * L1 is the best so we want as much in L1
 
 
 ## Basic High Performance Linpack guide
