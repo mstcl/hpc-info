@@ -54,9 +54,9 @@ General rule for `p` and `q`:
 
 **Things to consider:**
 To check whether its working, set `N` to something low (10,000 or less) and the run should be really fast (but probably not a good result).
-Turn this into a slurm script and increase N to what the website suggests (and maybe even a little bit higher!)
+Turn this into a slurm script and increase `N` to what the website suggests (and maybe even a little bit higher!)
 You can also try changing out compiler/mpi/blas library. This will require you to reconfigure and rebuild. 
-Play around with different number of nodes/cores. Remember to change the mpirun command as well as p and q
+Play around with different number of nodes/cores. Remember to change the mpirun command as well as `p` and `q`
 
 ### Running
 
