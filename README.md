@@ -64,6 +64,8 @@ General rule for `p` and `q`:
 - Make sure they're as square as possible
 - `q > p`
 
+- `#N` declares the number of `N` values. Set it to 1.
+
 **Things to consider:**
 To check whether its working, set `N` to something low (10,000 or less) and the run should be really fast (but probably not a good result).
 Turn this into a slurm script and increase `N` to what the website suggests (and maybe even a little bit higher!)
@@ -93,6 +95,10 @@ With multiple physical cores per node, add these additional flags:
 ```bash
 --bind-to socket --map-by socket
 ```
+
+If in doubt, use `OMP_NUM_THREADS=1`.
+
+* 1 core per rank, and set `p` and `q` so that `p * q` to be equal to the total number of cores.
 
 ### Hardware and some calculations
 
