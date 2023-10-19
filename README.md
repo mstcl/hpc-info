@@ -6,7 +6,7 @@ Types of benchmarking
   * choose big number to read/write
   * read > write
   * care about the time it takes to read/write.vegetarian 
-* HPL:
+* HPL: see [here](#basic-high-performance-linpack-guide)
 * IPM:
 * STREAM: memory
   * same as IOZONE but uses memory instead
