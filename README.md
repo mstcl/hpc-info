@@ -1,6 +1,10 @@
 ## General information on HPC
 
+Types of benchmarking
 
+* IOZONE
+* HPL
+* IPM
 
 
 ## Basic High Performance Linpack guide
