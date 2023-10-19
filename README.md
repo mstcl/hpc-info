@@ -11,7 +11,8 @@ Types of benchmarking
 * STREAM: memory
   * same as IOZONE but uses memory instead
   * bandwidth vs. size affected by cache (L1, L2, L3, RAM)
-  * L1 is the best so we want as much in L1
+  * L1 is the best so we want as much in L1. L1 has split instruction and data cache.
+  * L2, L3, and RAM are shared, which can be bottlenecked.
 
 
 ## Basic High Performance Linpack guide
