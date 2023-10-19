@@ -1,3 +1,8 @@
+## General information on HPC
+
+
+
+
 ## Basic High Performance Linpack guide
 
 Accessible here: [https://www.netlib.org/benchmark/hpl](https://www.netlib.org/benchmark/hpl/)
@@ -121,7 +126,7 @@ CPU vs. GPU:
 
 The result you're looking for is the value towards the bottom that says GFLOPs. That's pretty much the only value we care about
 
-### SLURM syntax
+## SLURM syntax
 
 Be aware of `nodes` vs. `ntasks`
 
