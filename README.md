@@ -1,3 +1,20 @@
+## Lustre
+
+### Acronyms
+
+- **MDS** – Manages filenames and directories, file
+stripe locations, locking, ACLs, etc.
+- **MDT** – Block device used by MDS to store
+metadata information
+- **OSS** – Handles I/O requests for file data
+- **OST** – Block device used by OSS to store file data.
+Each OSS usually serves multiple OSTs.
+- **MGS** – Management server. Stores configuration
+information for one or more Lustre file systems.
+- **MGT** - Block device used by MGS for data storage
+- **LNET** - (Lustre Networking) provides the underlying communication infrastructure
+
+
 ## General information on HPC
 
 Types of benchmarking
