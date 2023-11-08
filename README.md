@@ -23,6 +23,11 @@ Getting good performance on a single node ([source](https://manual.gromacs.org/c
 - `-pin`: attempt to set affinity of threads to cores. Keep to "on".
 - `-nb`: if no GPU, set to "cpu".
 
+### Notes
+
+- MPI might be more performant than OpenMP due to less memory contension.
+- PME (Particle-mesh Ewald) ranks, when separate, seems to give better performance.
+
 ## Lustre
 
 ### Acronyms
