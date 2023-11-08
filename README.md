@@ -19,7 +19,7 @@ Getting good performance on a single node ([source](https://manual.gromacs.org/c
 - `-ntmpi`: number of thread-MPI ranks to use. Default is one rank per core.
 - `-ntomp`: number of OpenMP threads per rank (honors `OMP_NUM_THREADS`), max 64.
 - `-npme`: number of ranks to dedicate to long-ranged component of PME. Keep to 2?
-- `-ntomp_pme`: default copies from `-ntomp`.
+- `-ntomp_pme`: number of separate PME ranks, default copies from `-ntomp`.
 - `-pin`: attempt to set affinity of threads to cores. Keep to "on".
 - `-nb`: if no GPU, set to "cpu".
 
