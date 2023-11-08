@@ -1,6 +1,8 @@
-## GROMACS mdrun
+## GROMACS (mdrun)
 
-Getting good performance on a single node ([source](https://manual.gromacs.org/current/user-guide/mdrun-performance.html#running-mdrun-within-a-single-node))
+### Getting good performance on a single node
+
+([source](https://manual.gromacs.org/current/user-guide/mdrun-performance.html#running-mdrun-within-a-single-node))
 
 - thread-MPI (enabled by default in GROMACS): use native, hardware threads on a single node but on a single node, more efficiently.
   - real MPI and thread-MPI from the user perspective looks almost the same
@@ -8,12 +10,12 @@ Getting good performance on a single node ([source](https://manual.gromacs.org/c
   - external MPI runs more slowly than thread-MPI
 - diagnostics: at runtime, it will put in log/stdout/stderr to inform the user about their choices and consequences
 
-### Environment variables and MPI
+#### Environment variables and MPI
 
 - `OMP_NUM_THREADS`: number of OpenMP threads, we control this
 - `mpirun` before `./gmx`: will use external MPI
 
-### Relevant flags
+#### Relevant flags
 
 - `-nt`: number of threads (whether thread-MPI ranks or OpenMP threads within ranks depends on other settings)
 - `-ntmpi`: number of thread-MPI ranks to use. Default is one rank per core.
@@ -23,14 +25,79 @@ Getting good performance on a single node ([source](https://manual.gromacs.org/c
 - `-pin`: attempt to set affinity of threads to cores. Keep to "on".
 - `-nb`: if no GPU, set to "cpu".
 
-### Notes
+#### Notes
 
 - MPI might be more performant than OpenMP due to less memory contension.
 - PME (Particle-mesh Ewald) ranks, when separate, seems to give better performance.
 
-## Lustre
+### Building GROMACS
 
-### Acronyms
+([source](https://manual.gromacs.org/current/install-guide/index.html#doing-a-build-of-gromacs))
+
+#### First steps
+
+```bash
+tar xfz gromacs-2023.3.tgz
+cd gromacs-2023.3
+mkdir build-gromacs  # or whatever directory, but should be a subdirectory
+cd build-gromacs
+cmake ..
+```
+
+#### Prerequisite & notes
+
+- minimum GNU gcc 9.
+- pass multiple options at once.
+- use `ccmake` after `cmake ..` returns to see all the settings that were chosen.
+- most options have `CMAKE_` and `GMX_` prefixes.
+
+#### Flags
+
+- Help GROMACS find right libraries and binaries external to it.
+  - `-DCMAKE_INCLUDE_PATH` for header files
+  - `-DCMAKE_LIBRARY_PATH` for libraries
+  - `-DCMAKE_PREFIX_PATH` for header, libraries and binaries (e.g. `/usr/local`). For example, `which hwlock` and stick that in.
+-`-DCMAKE_INSTALL_PREFIX`: path where GROMAC installs, and places headers, binaries and libraries. This is the root of the GROMACS installation.
+- `-DGMX_DOUBLE=off`: turn off double precision as it's slower.
+- MPI: `-DGMX_MPI=ON` (this binary is `gmx_mpi`)
+- FFT library
+  - `-DGMX_BUILD_OWN_FFTW=ON` to let GROMACS build FFTW from source (this is good enough)
+  - `-DGMX_FFT_LIBRARY=<your library like fftw3> -DFFTWF_LIBRARY=<path to library>`
+- If `hwloc` is installed: `-DGMX_HWLOC=ON` (to improve runtime detection of hw capabilities).
+- SIMD: if in doubt, choose the lowest number you think might work and see what mdrun says (highest value leads to performance loss on processors like Skylake and 1st-gen Zen).
+  - run `lscpu` and look for "Flags".
+  - set with `-DGMX-SIMD=<value>`
+- BLAS: `-DGMX_BLAS_USER=<path to your BLAS>`
+- LAPACK: `-DGMX_LAPACK_USER=<path to your LAPACK>`
+
+#### Final step for installation
+
+With multi-core run with
+
+```bash
+make -j <Number of processors>
+make check
+make install
+```
+
+Source their script `GMXRC` before running it! (Stick this in SLURM)
+
+```bash
+source /your/installation/prefix/here/bin/GMXRC
+```
+
+#### Overview
+
+1. Get the latest version of your C and C++ compilers.
+2. Check that you have CMake version 3.18.4 or later.
+3. Get and unpack the latest version of the GROMACS tarball.
+4. Make a separate build directory and change to it.
+5. Run cmake with the path to the source as an argument
+6. Run make, make check, and make install
+7. Source GMXRC to get access to GROMACS
+
+
+## Lustre acronyms
 
 - **MDS** – Manages filenames and directories, file
 stripe locations, locking, ACLs, etc.
