@@ -1,3 +1,28 @@
+## GROMACS mdrun
+
+Getting good performance on a single node ([source](https://manual.gromacs.org/current/user-guide/mdrun-performance.html#running-mdrun-within-a-single-node))
+
+- thread-MPI (enabled by default in GROMACS): use native, hardware threads on a single node but on a single node, more efficiently.
+  - real MPI and thread-MPI from the user perspective looks almost the same
+  - GROMACS refers MPI ranks to mean either kind (MPI & thread-MPI)
+  - external MPI runs more slowly than thread-MPI
+- diagnostics: at runtime, it will put in log/stdout/stderr to inform the user about their choices and consequences
+
+### Environment variables and MPI
+
+- `OMP_NUM_THREADS`: number of OpenMP threads, we control this
+- `mpirun` before `./gmx`: will use external MPI
+
+### Relevant flags
+
+- `-nt`: number of threads (whether thread-MPI ranks or OpenMP threads within ranks depends on other settings)
+- `-ntmpi`: number of thread-MPI ranks to use. Default is one rank per core.
+- `-ntomp`: number of OpenMP threads per rank (honors `OMP_NUM_THREADS`), max 64.
+- `-npme`: number of ranks to dedicate to long-ranged component of PME. Keep to 2?
+- `-ntomp_pme`: default copies from `-ntomp`.
+- `-pin`: attempt to set affinity of threads to cores. Keep to "on".
+- `-nb`: if no GPU, set to "cpu".
+
 ## Lustre
 
 ### Acronyms
